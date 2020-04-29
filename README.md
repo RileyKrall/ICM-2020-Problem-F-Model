@@ -40,7 +40,7 @@ git clone https://github.com/RileyKrall/ICM-2020-Problem-F-Model.git
 Run the script from the directory after cloning.
 
 ```
-cd ICM-2020-Problem-F-Model.git
+cd ICM-2020-Problem-F-Model
 python MCM2020LandMassModel.py
 ```
 

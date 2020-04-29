@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 """
 CWU modeling team for the Interdiciplinery Competition in Modeling, Problem F
 
@@ -12,20 +12,20 @@ All height data then scaled to represent island heights in meters
 Model created during a 4 day project, accompanied paper presents results found
 and the rest of the model to solve the problem.
 """
-from plotly.offline import plot
-from IPython.display import Image
-import plotly.graph_objects as go
-import pandas as pd
-import numpy as np
-import PIL as pil
-import plotly.io as pio
 import csv
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.io as pio
+
+from PIL import Image
+from plotly.offline import plot
 
 """
 Paths and Variables
 """
-savedDataLocation = "C:\\Users\Riley\Documents\MCM2020\Maldivesterrain\\"
-landImagePath = "C:\\Users\Riley\Documents\MCM2020\Maldivesterrain\\Maldives.png"
+savedDataLocation = "."
+landImagePath = "Maldives.png"
 islandName = "Maldives"
 startYear = 2020
 
@@ -130,15 +130,10 @@ def IslandModel(island, seaLevelChanges, stormSurgeRisk, cutOffSeaLevel, startin
 BEGIN MODEL DATA SETUP
 """            
 #Get heightmap images
-MaldivesImage = pil.Image.open(landImagePath)
-
-
-#Convert image heightmap to csv
-np.savetxt(savedDataLocation + islandName + '.csv', MaldivesImage, delimiter=',')
-
+MaldivesImage = Image.open(landImagePath)
 
 #Make island dataframe
-Maldives = pd.read_csv(savedDataLocation + islandName + '.csv')
+Maldives = pd.DataFrame(np.array(MaldivesImage))
 
 
 #Scale down the data to fit proper measurments

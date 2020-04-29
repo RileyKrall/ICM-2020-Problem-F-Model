@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 """
 CWU modeling team for the Interdiciplinery Competition in Modeling, Problem F
 
@@ -13,11 +13,11 @@ Model created during a 4 day project, accompanied paper presents results found
 and the rest of the model to solve the problem.
 """
 from plotly.offline import plot
-from IPython.display import Image
+#from IPython.display import Image
 import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
-import PIL as pil
+from PIL import Image
 import plotly.io as pio
 import csv
 
@@ -130,7 +130,7 @@ def IslandModel(island, seaLevelChanges, stormSurgeRisk, cutOffSeaLevel, startin
 BEGIN MODEL DATA SETUP
 """            
 #Get heightmap images
-MaldivesImage = pil.Image.open(landImagePath)
+MaldivesImage = Image.open(landImagePath)
 
 
 #Convert image heightmap to csv

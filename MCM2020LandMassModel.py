@@ -132,13 +132,8 @@ BEGIN MODEL DATA SETUP
 #Get heightmap images
 MaldivesImage = Image.open(landImagePath)
 
-
-#Convert image heightmap to csv
-np.savetxt(savedDataLocation + islandName + '.csv', MaldivesImage, delimiter=',')
-
-
 #Make island dataframe
-Maldives = pd.read_csv(savedDataLocation + islandName + '.csv')
+Maldives = pd.DataFrame(np.array(MaldivesImage))
 
 
 #Scale down the data to fit proper measurments

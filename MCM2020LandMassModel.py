@@ -24,8 +24,8 @@ from plotly.offline import plot
 """
 Paths and Variables
 """
-savedDataLocation = "C:\\Users\Riley\Documents\MCM2020\Maldivesterrain\\"
-landImagePath = "C:\\Users\Riley\Documents\MCM2020\Maldivesterrain\\Maldives.png"
+savedDataLocation = "."
+landImagePath = "Maldives.png"
 islandName = "Maldives"
 startYear = 2020
 

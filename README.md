@@ -1,7 +1,8 @@
 # ICM 2020 Problem F Model
 
 Model of land change of islands. Converts grey-scale heghtmap image to CSV,
-then calculates yearly precent change of land.
+then calculates yearly precent change of land. This model is described in more
+detail in the [paper](doc/protect-and-preserve.pdf) that it was made for.
 
 ## Getting Started
 
@@ -52,9 +53,10 @@ python MCM2020LandMassModel.py
 * **Riley Krall** - *Model* - <https://github.com/RileyKrall>
 
 See also the list of
-[contributors](https://github.com/your/project/contributors) who participated
-in this project.
+[contributors](https://github.com/RileyKrall/ICM-2020-Problem-F-Model/contributors)
+who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License see LICENSE.txt for details.
+This project is licensed under the MIT License, see [LICENSE.txt](LICENSE.txt)
+for details.

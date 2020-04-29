@@ -12,14 +12,14 @@ All height data then scaled to represent island heights in meters
 Model created during a 4 day project, accompanied paper presents results found
 and the rest of the model to solve the problem.
 """
-from plotly.offline import plot
-#from IPython.display import Image
-import plotly.graph_objects as go
-import pandas as pd
-import numpy as np
-from PIL import Image
-import plotly.io as pio
 import csv
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.io as pio
+
+from PIL import Image
+from plotly.offline import plot
 
 """
 Paths and Variables

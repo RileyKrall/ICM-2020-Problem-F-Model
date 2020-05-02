@@ -43,6 +43,19 @@ def raiseSeaLevel(island, change):
             
     return changedIsland
 
+def _raiseSeaLevel(island, change):
+    changedIsland = island.copy()
+    change = change * 0.001 # Convert mm to m.
+    for indexi, Data in changedIsland.iterrows():
+        for indexj, value in Data.items():
+            newVal = value - change
+            if newVal < 0:
+                newVal = 0
+            changedIsland.at[indexi, indexj] = newVal
+            
+    print(changedIsland.iloc[300, 300])
+    return changedIsland
+
 #Count total land in area
 def getLandCount(island):
     count = 0
@@ -77,6 +90,64 @@ def plotIsland(island, fileTitle, plotTitle, saveLoc):
     #Uncomment to save file
     #pio.write_image(fig, file=saveLoc+fileTitle+".png", format='png')
     plot(fig)
+
+# Dump raw image data for each step of the sea-level rise model
+def sea_change_image_dump(island, seaLevelChanges, stormSurgeRisk, cutOffSeaLevel, startingYear, runTitle, fileTitle, saveLoc):
+    print(runTitle)
+
+    land_count_0 = getLandCount(island)
+    year = startingYear
+
+    for i in seaLevelChanges:
+        year += 1
+        island_i = _raseSeaLevel(island, i)
+        land_count_i = getLandCount(island_i)
+        percent_remaining = (land_count_i / land_count_0) * 100
+
+    print(runTitle)
+    
+    with open(saveLoc + fileTitle + '.csv', 'w', newline='') as file:
+        #Data storage and prepping
+        fileWriter = csv.writer(file)
+        seaLevel = 0
+        initialLandCount = getLandCount(island)
+        yearCount = startingYear
+        for change in seaLevelChanges:
+            #convert mm to m
+            convertChange = change*0.001
+            #Raise sea level
+            seaLevel = convertChange
+            #Create changed island
+            changedIsland = raiseSeaLevel(island, convertChange)
+            #Land Counting
+            changedIslandLand = getLandCount(changedIsland)
+            percentChangedFromTotal = (changedIslandLand/initialLandCount)*100
+                        
+            #Get danger zone count
+            landInDZ = getLandDangerZone(changedIsland, stormSurgeRisk)
+            ratioLandToDZ = (landInDZ/changedIslandLand)*100            
+            
+            #Increment year
+            yearCount += 1
+            #Prep next iteration
+            #prevIterationIsland = changedIsland.copy()
+            
+            #Print and write results
+            print("Year: " + str(yearCount) + "    Total landmass percent from original: " + str(percentChangedFromTotal) + "    Current land in the danger zone: " + str(ratioLandToDZ) + "%")
+            fileWriter.writerow([str(yearCount), str(percentChangedFromTotal), str(ratioLandToDZ)])
+            
+            #Plot surface every n years
+            if ((yearCount - 2000) % 10 == 0):
+                plotIsland(changedIsland, fileTitle + str(yearCount), runTitle +" "+ str(yearCount), saveLoc)
+            
+            #Check if stopping point has been reached
+            if seaLevel >= cutOffSeaLevel:
+                print("Airport will be submerged by " + str(yearCount))
+                break
+            
+            if changedIslandLand == 0:
+                print("Island will be submerged by " + str(yearCount))
+                break
 
 #Main runner of model. Calculates change in island every year
 def IslandModel(island, seaLevelChanges, stormSurgeRisk, cutOffSeaLevel, startingYear, runTitle, fileTitle, saveLoc):

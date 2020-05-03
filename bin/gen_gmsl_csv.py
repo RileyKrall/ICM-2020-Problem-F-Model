@@ -8,7 +8,7 @@ print(len(RCP1))
 print(len(RCP2))
 print(len(RCP3))
 
-with open('../res/gmsl-2020-2090.csv', 'w') as gmsl:
+with open('../sealevelrise/resources/gmsl-2020-2090.csv', 'w') as gmsl:
     fieldnames = ['year', 'rcp2.6', 'rcp4.5', 'rcp8.5']
     year_writer = csv.DictWriter(gmsl, fieldnames=fieldnames)
     year_writer.writeheader()

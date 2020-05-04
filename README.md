@@ -22,10 +22,9 @@ modules to be installed.
 Install them with using pip.
 
 ```
-pip install numpy
-pip install pandas
-pip install plotly
-pip install Pillow
+git clone https://github.com/RileyKrall/ICM-2020-Problem-F-Model.git
+cd ICM-2020-Problem-F-Model
+make init
 ```
 
 ### Installing
@@ -37,11 +36,19 @@ repository to your local machine.
 git clone https://github.com/RileyKrall/ICM-2020-Problem-F-Model.git
 ```
 
-Run the script from the directory after cloning.
+Test the sea level rise model script from the directory after cloning.
 
 ```
 cd ICM-2020-Problem-F-Model
-python MCM2020LandMassModel.py
+make test
+```
+
+*Optional*:
+
+Use experimental pip installation from the project directory.
+
+```
+pip install .
 ```
 
 ## Built With
